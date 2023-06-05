@@ -23,8 +23,10 @@ public class BatStatus : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("ball"))
         {
-            Vector3 direction = collision.transform.forward;
-            gameObject.GetComponent<Rigidbody2D>().AddForce(force * direction);
+            collision.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            Vector3 direction = new Vector3(1,1,0);
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(force * direction,ForceMode2D.Impulse);
+            Debug.Log("hit");
         }
     }
 }

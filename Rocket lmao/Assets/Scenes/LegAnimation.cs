@@ -51,7 +51,7 @@ public class LegAnimation : MonoBehaviour
     {
         if(lerp < 1)
         {
-            Debug.Log("move");
+            //Debug.Log("move");
             oldPos = target1.transform.position;
             newPos = footTarget;
 
@@ -94,6 +94,7 @@ public class LegAnimation : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        /*
         Gizmos.DrawSphere(footTarget, 2);
 
         Gizmos.color = Color.red;
@@ -102,6 +103,7 @@ public class LegAnimation : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawSphere(newPos, 1);
         Gizmos.DrawWireSphere(balance.transform.position, 5);
+        */
     }
 
 }
