@@ -29,4 +29,10 @@ public class BatStatus : MonoBehaviour
             Debug.Log("hit");
         }
     }
+
+
+    public void Smash()
+    {
+
+    }
 }

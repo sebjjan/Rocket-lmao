@@ -10,6 +10,7 @@ public class AttackScript : MonoBehaviour
     public float swingSpeed;
     public float lerp;
     public GameObject bat;
+    public Transform startPoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,7 @@ public class AttackScript : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             lerp = 0;
+            bat.transform.position = startPoint.position;
             Smash();
         }
 
@@ -36,7 +38,7 @@ public class AttackScript : MonoBehaviour
 
     public void Smash()
     {
-
+        bat.GetComponent<BatStatus>().Smash();
        
     }
 }
