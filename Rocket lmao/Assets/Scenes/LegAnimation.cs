@@ -6,12 +6,17 @@ using UnityEngine;
 public class LegAnimation : MonoBehaviour
 {
     public GameObject target1;
-    public GameObject oppositeLeg;
+    public LegAnimation oppositeLeg;
     public float lerpSpeed;
     public float maxDistance;
     public GameObject balance;
-    public Collider2D searchRange;
+  
     public ContactFilter2D contactFilter;
+    public Transform RayCaster;
+    public LayerMask layerMask;
+
+    private Vector3 tempPos;
+   // public GameObject Test;
 
     Vector3 footTarget;
 
@@ -33,31 +38,47 @@ public class LegAnimation : MonoBehaviour
 
 
 
-        if (Vector3.Distance(target1.transform.position, balance.transform.position) > maxDistance && lerp >= 1)
+        if (Vector3.Distance(target1.transform.position, balance.transform.position) > maxDistance && lerp >= 1 && oppositeLeg.lerp > 0.5)
         {
-            lerp = 0;
+           
+                lerp = 0;
+            
+            
 
             Debug.Log("out of balance");
 
            
 
         }
+        if(lerp == 0)
+        {
+            oldPos = target1.transform.position;
+            tempPos = footTarget;
+            MoveFoot();
+        }
+        if(lerp < 1)
+        {
+            MoveFoot();
+        }
 
-        MoveFoot();
+        target1.transform.position = newPos;
+      
     }
 
 
     private void MoveFoot()
     {
-        if(lerp < 1)
-        {
+        
             //Debug.Log("move");
-            oldPos = target1.transform.position;
-            newPos = footTarget;
+          
+        //Vector3 tempTarget = footTarget;
+           // newPos = footTarget;
 
-            target1.transform.position = Vector3.Lerp(oldPos, newPos, lerp);
-            lerp += Time.deltaTime * lerpSpeed;
-        }
+            newPos = Vector3.Lerp(oldPos, tempPos, lerp);
+
+        newPos += new Vector3(0, Mathf.Sin(lerp) * 10,0);
+        lerp += Time.deltaTime * lerpSpeed;
+       
       
 
         //fixa den
@@ -67,9 +88,28 @@ public class LegAnimation : MonoBehaviour
 
     private void FindTarget()
     {
+        /*
         Collider2D closestCollider = null;
         List<Collider2D> colliders = new List<Collider2D>();
         searchRange.OverlapCollider(contactFilter, colliders);
+        */
+        RaycastHit2D rayHit = Physics2D.Raycast(RayCaster.position, Vector2.down, 100000, layerMask);
+        if(rayHit.point != Vector2.zero)
+        {
+           
+            footTarget = rayHit.point;
+           // Test.transform.position = rayHit.point;
+            if (rayHit.point == (Vector2)newPos)
+            {
+                Debug.Log("YIPPU");
+            }
+           // Debug.Log(rayHit.point);
+
+        }
+
+
+
+        /*
         foreach(Collider2D c in colliders)
         {
             if(closestCollider == null)
@@ -86,8 +126,9 @@ public class LegAnimation : MonoBehaviour
     footTarget = closestCollider.ClosestPoint(balance.transform.position);
             newPos = footTarget;
         }
-    
-       // Vector3 target = Physics2D.Linecast()
+        */
+
+        // Vector3 target = Physics2D.Linecast()
     }
 
 
@@ -104,6 +145,11 @@ public class LegAnimation : MonoBehaviour
         Gizmos.DrawSphere(newPos, 1);
         Gizmos.DrawWireSphere(balance.transform.position, 5);
         */
+
+        Gizmos.DrawWireSphere(newPos, 4);
+        Gizmos.DrawLine(RayCaster.position, newPos);
+        Gizmos.DrawWireSphere(balance.transform.position, maxDistance);
+       // Gizmos.DrawCube(testPosition.position, new Vector3(2,2,2));
     }
 
 }
