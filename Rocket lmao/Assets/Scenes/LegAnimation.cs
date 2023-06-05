@@ -6,7 +6,7 @@ using UnityEngine;
 public class LegAnimation : MonoBehaviour
 {
     public GameObject target1;
-    public GameObject target2;
+    public GameObject oppositeLeg;
     public float lerpSpeed;
     public float maxDistance;
     public GameObject balance;
@@ -49,8 +49,9 @@ public class LegAnimation : MonoBehaviour
 
     private void MoveFoot()
     {
-        if(lerp < 0)
+        if(lerp < 1)
         {
+            Debug.Log("move");
             oldPos = target1.transform.position;
             newPos = footTarget;
 
@@ -83,6 +84,7 @@ public class LegAnimation : MonoBehaviour
         if(closestCollider != null)
         {
     footTarget = closestCollider.ClosestPoint(balance.transform.position);
+            newPos = footTarget;
         }
     
        // Vector3 target = Physics2D.Linecast()
@@ -94,10 +96,12 @@ public class LegAnimation : MonoBehaviour
     {
         Gizmos.DrawSphere(footTarget, 2);
 
-        Gizmos.DrawSphere(oldPos, 2);
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(oldPos, 1);
 
-
-        Gizmos.DrawSphere(newPos, 2);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(newPos, 1);
+        Gizmos.DrawWireSphere(balance.transform.position, 5);
     }
 
 }
