@@ -10,6 +10,7 @@ public class LegAnimation : MonoBehaviour
     public float lerpSpeed;
     public float maxDistance;
     public GameObject balance;
+    public float stepHeight;
   
     public ContactFilter2D contactFilter;
     public Transform RayCaster;
@@ -38,7 +39,7 @@ public class LegAnimation : MonoBehaviour
 
 
 
-        if (Vector3.Distance(target1.transform.position, balance.transform.position) > maxDistance && lerp >= 1 && oppositeLeg.lerp > 0.5)
+        if (Vector3.Distance(target1.transform.position, balance.transform.position) > maxDistance && lerp >= 1 && oppositeLeg.lerp >= 1)
         {
            
                 lerp = 0;
@@ -75,8 +76,8 @@ public class LegAnimation : MonoBehaviour
            // newPos = footTarget;
 
             newPos = Vector3.Lerp(oldPos, tempPos, lerp);
-
-        newPos += new Vector3(0, Mathf.Sin(lerp) * 10,0);
+        newPos.y += Mathf.Sin(lerp * Mathf.PI) * stepHeight;
+        //newPos += new Vector3(0, Mathf.Sin(lerp) * 10,0);
         lerp += Time.deltaTime * lerpSpeed;
        
       
