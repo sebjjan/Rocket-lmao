@@ -46,7 +46,7 @@ public class LegAnimation : MonoBehaviour
             
             
 
-            Debug.Log("out of balance");
+            //Debug.Log("out of balance");
 
            
 

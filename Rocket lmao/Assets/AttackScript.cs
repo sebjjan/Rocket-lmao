@@ -85,7 +85,7 @@ public class AttackScript : MonoBehaviour
         }
     }
 
-    private void Swing()
+    public void Swing()
     {
        currentPos = currentPos + new Vector3(curve.Evaluate(lerp), curve.Evaluate(lerp), 0);
         lerp += Time.deltaTime * swingSpeed;
@@ -94,5 +94,12 @@ public class AttackScript : MonoBehaviour
             readySwing = false;
             isActing = false;
         }
+    }
+
+
+    public void StartAttack()
+    {
+        lerp = 0;
+        isActing = true;
     }
 }
