@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AttackScript : MonoBehaviour
 {
-
-    public AnimationCurve curve;
+    public AnimationCurve yCurve;
+    public AnimationCurve xCurve;
 
     public float swingSpeed;
     public float lerp;
@@ -87,7 +87,7 @@ public class AttackScript : MonoBehaviour
 
     public void Swing()
     {
-       currentPos = currentPos + new Vector3(curve.Evaluate(lerp), curve.Evaluate(lerp), 0);
+       currentPos = currentPos + new Vector3(xCurve.Evaluate(lerp), yCurve.Evaluate(lerp), 0);
         lerp += Time.deltaTime * swingSpeed;
         if(lerp >= 1)
         {

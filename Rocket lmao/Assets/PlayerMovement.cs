@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
@@ -9,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private bool isJumping = false;
     public float maxSpeed;
+
+    public List<GameObject> flipList;
 
     private Vector2 horizontalInput;
     private void Start()
@@ -39,7 +42,31 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Move(CallbackContext context)
     {
+        
+        
+
+        
         horizontalInput = context.ReadValue<Vector2>();
+
+        if(horizontalInput.x < 0)
+        {
+            foreach(GameObject g in flipList)
+            {
+                g.GetComponent<Transform>().localPosition = new Vector3(-20, -20, 1);
+            }
+            //GetComponent<Transform>().localScale = new Vector3(-1,1,1);
+           // IKStuff.GetComponent<Transform>().localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            foreach (GameObject g in flipList)
+            {
+               g.GetComponent<Transform>().localPosition = new Vector3(20, -20, 1);
+                // gameObject.GetComponent<Transform>().localPosition += new Vector3(40, 0, 0);
+            }
+            //GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
+            //IKStuff.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
+        }
        // rb.velocity += /* new Vector2(speed, rb.velocity.y)*/ speed * horizontalInput;
       //  rb.AddForce(speed * horizontalInput);
     }

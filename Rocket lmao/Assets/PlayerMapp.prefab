@@ -392,7 +392,7 @@ GameObject:
   - component: {fileID: 2237040451044789977}
   - component: {fileID: 2237040451044789974}
   m_Layer: 0
-  m_Name: Target
+  m_Name: BATHAND Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -671,7 +671,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 2237040451095239696}
-  force: 50
+  force: 300
 --- !u!1 &2237040451127203822
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,9 +753,9 @@ MonoBehaviour:
   target1: {fileID: 2237040451938912185}
   oppositeLeg: {fileID: 2237040452320929402}
   lerpSpeed: 5
-  maxDistance: 25
+  maxDistance: 30
   balance: {fileID: 2237040451889201887}
-  stepHeight: 5
+  stepHeight: 25
   contactFilter:
     useTriggers: 0
     useLayerMask: 0
@@ -1715,7 +1715,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ec90418fe952c469cdb6f4703efec0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curve:
+  yCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 5
+      outSlope: 5
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 5
+      inSlope: 5
+      outSlope: 5
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  xCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -2022,9 +2046,9 @@ MonoBehaviour:
   target1: {fileID: 2237040452380294706}
   oppositeLeg: {fileID: 2237040451127203827}
   lerpSpeed: 5
-  maxDistance: 25
+  maxDistance: 30
   balance: {fileID: 2237040451889201887}
-  stepHeight: 5
+  stepHeight: 25
   contactFilter:
     useTriggers: 0
     useLayerMask: 0
@@ -2277,6 +2301,7 @@ GameObject:
   - component: {fileID: 2237040452704289184}
   - component: {fileID: 2237040452704289185}
   - component: {fileID: 2237040452704288862}
+  - component: {fileID: 795648324}
   m_Layer: 0
   m_Name: Bridge
   m_TagString: Untagged
@@ -2327,7 +2352,7 @@ DistanceJoint2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2237040452704288860}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 2237040451044789977}
@@ -2351,3 +2376,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9b75b0d381cb1648bbc30bac512f66e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!231 &795648324
+SpringJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2237040452704288860}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 2237040451044789977}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 1
+  m_Distance: 24.091324
+  m_DampingRatio: 0
+  m_Frequency: 1000000

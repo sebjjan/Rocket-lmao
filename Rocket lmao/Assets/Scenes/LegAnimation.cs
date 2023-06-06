@@ -51,10 +51,11 @@ public class LegAnimation : MonoBehaviour
            
 
         }
-        if(lerp == 0)
+        tempPos = footTarget;
+        if (lerp == 0)
         {
             oldPos = target1.transform.position;
-            tempPos = footTarget;
+           
             MoveFoot();
         }
         if(lerp < 1)
