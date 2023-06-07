@@ -30,6 +30,8 @@ public class PlayerMovement : MonoBehaviour
     public GameObject bat;
 
     public float armForce;
+
+    public GameObject crossHair;
     
     private void Start()
     {
@@ -71,14 +73,16 @@ public class PlayerMovement : MonoBehaviour
 
         if (playerInput.currentControlScheme == "Gamepad")
         {
-            Vector2 test = stickAim * armForce;
-            batHand.transform.right= stickAim;
-            batHand.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-           // batHand.GetComponent<Rigidbody2D>().AddForce(stickAim.normalized * armForce);
+            crossHair.transform.position = (Vector2)transform.position + stickAim * 200;
 
-           // bat.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            // bat.GetComponent<Rigidbody2D>().AddForce(stickAim.normalized * armForce);
-            batHand.GetComponent<Rigidbody2D>().AddForce((mouseWorldPos - (Vector2)batHand.transform.position).normalized * armForce);
+           // Vector2 test = stickAim * armForce;
+           // batHand.transform.right = stickAim;
+            batHand.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            batHand.GetComponent<Rigidbody2D>().AddForce(stickAim.normalized * armForce);
+
+            bat.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+             bat.GetComponent<Rigidbody2D>().AddForce((crossHair.transform.position - bat.transform.position).normalized * armForce);
+           // batHand.GetComponent<Rigidbody2D>().AddForce((mouseWorldPos - (Vector2)batHand.transform.position).normalized * armForce);
 
 
         }
@@ -94,10 +98,10 @@ public class PlayerMovement : MonoBehaviour
             //batHand.GetComponent<Rigidbody2D>().MoveRotation(Quaternion.LookRotation((mouseWorldPos - (Vector2)batHand.transform.position).normalized), );
             //batHand.transform.right = (mouseWorldPos - (Vector2)batHand.transform.position).normalized;
             batHand.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            batHand.GetComponent<Rigidbody2D>().AddForce((mouseWorldPos - (Vector2)batHand.transform.position).normalized * armForce);
+            batHand.GetComponent<Rigidbody2D>().AddForce((mouseWorldPos - (Vector2)batHand.transform.position).normalized * armForce * 100);
 
           //  bat.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            bat.GetComponent<Rigidbody2D>().AddForce((mouseWorldPos - (Vector2)bat.transform.position).normalized * armForce);
+            bat.GetComponent<Rigidbody2D>().AddForce((mouseWorldPos - (Vector2)bat.transform.position).normalized * armForce * 100);
         }
 
 
