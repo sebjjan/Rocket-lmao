@@ -76,9 +76,11 @@ public class PlayerMovement : MonoBehaviour
             batHand.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
            // batHand.GetComponent<Rigidbody2D>().AddForce(stickAim.normalized * armForce);
 
-            bat.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-           bat.GetComponent<Rigidbody2D>().AddForce(stickAim.normalized * armForce);
-         
+           // bat.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            // bat.GetComponent<Rigidbody2D>().AddForce(stickAim.normalized * armForce);
+            batHand.GetComponent<Rigidbody2D>().AddForce((mouseWorldPos - (Vector2)batHand.transform.position).normalized * armForce);
+
+
         }
         else
         {
