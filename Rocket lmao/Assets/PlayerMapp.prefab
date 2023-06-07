@@ -804,7 +804,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: -0.23302105, w: 0.9724717}
   m_LocalPosition: {x: -0.06, y: -0.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2237040452401573653}
   m_Father: {fileID: 2237040450750414384}
@@ -1670,6 +1670,10 @@ MonoBehaviour:
   flipList:
   - {fileID: 2237040452311774233}
   horizontalInput: {x: 0, y: 0}
+  batHand: {fileID: 2237040451044789972}
+  crosshairDistance: 5
+  Crosshair: {fileID: 0}
+  armForce: 9000
 --- !u!50 &2237040452150665448
 Rigidbody2D:
   serializedVersion: 4
@@ -1832,6 +1836,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 35e045b0-7f14-4472-be34-5a9f881c9ff8
     m_ActionName: New action map/Move[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2237040452150665446}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: Aim
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c82f43eb-15ac-4057-b0a5-65c107a70a36
+    m_ActionName: New action map/Aim[/XInputControllerWindows1/rightStick,/XInputControllerWindows/rightStick]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: New action map

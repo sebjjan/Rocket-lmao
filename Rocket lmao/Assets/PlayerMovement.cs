@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerMovement : MonoBehaviour
@@ -14,13 +16,40 @@ public class PlayerMovement : MonoBehaviour
     public List<GameObject> flipList;
 
     public Vector2 horizontalInput;
+
+    public GameObject batHand;
+
+    private Vector2 mouseWorldPos;
+
+    private PlayerInput playerInput;
+
+    private Vector2 stickAim;
+    public float crosshairDistance;
+
+    
+
+    public float armForce;
+    
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerInput = GetComponent<PlayerInput>();
     }
 
     private void Update()
     {
+        mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // mouseWorldPos.z = 0;
+
+        if (playerInput.currentControlScheme == "Gamepad")
+        {
+           // Crosshair.transform.position = (Vector2)transform.position + stickAim * crosshairDistance;
+        }
+        else
+        {
+           // Crosshair.transform.position = mouseWorldPos;
+        }
+
         //float horizontalInput = Input.GetAxis("Horizontal");
 
         // Move horizontally
@@ -38,12 +67,41 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
 
-       // rb.velocity = new Vector2(Vector2.ClampMagnitude(speed * horizontalInput, maxSpeed).x, rb.velocity.y);
-       if(true /*rb.velocity.x < maxSpeed*/)
+        if (playerInput.currentControlScheme == "Gamepad")
+        {
+            Vector2 test = stickAim * armForce;
+            batHand.transform.right= stickAim;
+            batHand.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            batHand.GetComponent<Rigidbody2D>().AddForce(stickAim * armForce);
+            Debug.Log(test);
+        }
+        else
+        {
+         //   batHand.GetComponent<Rigidbody2D>().AddTorque(1000);
+            Quaternion rotation = Quaternion.LookRotation(mouseWorldPos - (Vector2)batHand.transform.position, Vector3.up);
+            print(rotation);
+            batHand.GetComponent<Rigidbody2D>().MoveRotation(rotation);
+          
+            //batHand.GetComponent<Rigidbody2D>().MoveRotation(Quaternion.LookRotation((mouseWorldPos - (Vector2)batHand.transform.position).normalized), );
+            //batHand.transform.right = (mouseWorldPos - (Vector2)batHand.transform.position).normalized;
+            batHand.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            batHand.GetComponent<Rigidbody2D>().AddForce((mouseWorldPos - (Vector2)batHand.transform.position).normalized * armForce);
+        }
+
+
+        // rb.velocity = new Vector2(Vector2.ClampMagnitude(speed * horizontalInput, maxSpeed).x, rb.velocity.y);
+        if (true /*rb.velocity.x < maxSpeed*/)
         {
             rb.AddForce(new Vector2(speed*horizontalInput.x, 0));
         }
-        
+
+       
+      
+
+
+
+
+
     }
     public void Move(CallbackContext context)
     {
@@ -78,10 +136,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump()
     {
-        Debug.Log("i want to jump");
+       
         if (!isJumping)
         {
-            Debug.Log("jump");
+           
             rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
             isJumping = true;
         }
@@ -95,5 +153,21 @@ public class PlayerMovement : MonoBehaviour
         {
             isJumping = false;
         }
+    }
+
+
+
+    public void Aim(CallbackContext context)
+    {
+        if (context.ReadValue<Vector2>() != Vector2.zero)
+        {
+            stickAim = context.ReadValue<Vector2>();
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(transform.position, mouseWorldPos - (Vector2)batHand.transform.position);
+       
     }
 }
