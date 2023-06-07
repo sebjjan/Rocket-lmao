@@ -7,11 +7,12 @@ public class AnimationController : MonoBehaviour
     private Animator animator;
     private Renderer[] bodyPartRenderers;
     private Renderer batRenderer;
+    private GameObject Player;
     private void Start()
     {
         animator = GetComponent<Animator>();
         Transform bodyTransform = transform.Find("Player/Body");
-        bodyPartRenderers = bodyTransform.GetComponentsInChildren<Renderer>();
+        bodyPartRenderers = bodyTransform.GetComponentInParent<Renderer>();
         batRenderer = transform.Find("Bat")?.GetComponent<Renderer>();
       
     }
