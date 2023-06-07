@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerMovement : MonoBehaviour
@@ -26,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 stickAim;
     public float crosshairDistance;
 
-    
+    public GameObject bat;
 
     public float armForce;
     
@@ -35,9 +36,10 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerInput = GetComponent<PlayerInput>();
     }
-
+  
     private void Update()
     {
+        
         mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         // mouseWorldPos.z = 0;
 
@@ -72,20 +74,28 @@ public class PlayerMovement : MonoBehaviour
             Vector2 test = stickAim * armForce;
             batHand.transform.right= stickAim;
             batHand.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            batHand.GetComponent<Rigidbody2D>().AddForce(stickAim * armForce);
-            Debug.Log(test);
+           // batHand.GetComponent<Rigidbody2D>().AddForce(stickAim.normalized * armForce);
+
+            bat.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+           bat.GetComponent<Rigidbody2D>().AddForce(stickAim.normalized * armForce);
+         
         }
         else
         {
-         //   batHand.GetComponent<Rigidbody2D>().AddTorque(1000);
-            Quaternion rotation = Quaternion.LookRotation(mouseWorldPos - (Vector2)batHand.transform.position, Vector3.up);
-            print(rotation);
-            batHand.GetComponent<Rigidbody2D>().MoveRotation(rotation);
-          
+            //
+            //  batHand.GetComponent<Rigidbody2D>().AddTorque(1000);
+            /*  Quaternion rotation = Quaternion.LookRotation(mouseWorldPos - (Vector2)batHand.transform.position);
+              print(rotation);
+              batHand.GetComponent<Rigidbody2D>().MoveRotation(rotation);
+
+              */
             //batHand.GetComponent<Rigidbody2D>().MoveRotation(Quaternion.LookRotation((mouseWorldPos - (Vector2)batHand.transform.position).normalized), );
             //batHand.transform.right = (mouseWorldPos - (Vector2)batHand.transform.position).normalized;
             batHand.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             batHand.GetComponent<Rigidbody2D>().AddForce((mouseWorldPos - (Vector2)batHand.transform.position).normalized * armForce);
+
+          //  bat.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            bat.GetComponent<Rigidbody2D>().AddForce((mouseWorldPos - (Vector2)bat.transform.position).normalized * armForce);
         }
 
 
@@ -170,4 +180,8 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.DrawRay(transform.position, mouseWorldPos - (Vector2)batHand.transform.position);
        
     }
+
+
+
+   
 }
