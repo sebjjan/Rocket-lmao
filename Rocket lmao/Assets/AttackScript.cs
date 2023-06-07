@@ -87,7 +87,7 @@ public class AttackScript : MonoBehaviour
 
     public void Swing()
     {
-       currentPos = currentPos + new Vector3(curve.Evaluate(lerp), curve.Evaluate(lerp), 0);
+       currentPos = currentPos + new Vector3(curve.Evaluate(lerp) * 10, curve.Evaluate(lerp) * 10, 0);
         lerp += Time.deltaTime * swingSpeed;
         if(lerp >= 1)
         {
