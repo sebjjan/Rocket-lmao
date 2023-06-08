@@ -31,4 +31,12 @@ public class MenuScript : MonoBehaviour
     {
         SceneManager.LoadScene(3);
     }
+
+    
+
+
+    public void quitMe()
+    {
+        Application.Quit();
+    }
 }
