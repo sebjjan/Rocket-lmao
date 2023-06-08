@@ -33,11 +33,17 @@ public class PlayerMovement : MonoBehaviour
     public float controllerarmForce;
 
     public GameObject crossHair;
-    
+
+    private void Awake()
+    {
+        
+    }
     private void Start()
     {
+       // rb.MovePosition(new Vector3(0, 100, 0));
         rb = GetComponent<Rigidbody2D>();
         playerInput = GetComponent<PlayerInput>();
+       
     }
   
     private void Update()
@@ -198,7 +204,12 @@ public class PlayerMovement : MonoBehaviour
        
     }
 
+    
+    public void GoToMain()
+    {
+        SceneManager.LoadScene(0);
+    }
 
+    
 
-   
 }

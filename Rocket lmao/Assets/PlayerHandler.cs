@@ -36,9 +36,5 @@ public class PlayerHandler : MonoBehaviour
         }
     }
 
-    public void GoToMain()
-    {
-        SceneManager.LoadScene(0);
-    }
-
+  
 }
