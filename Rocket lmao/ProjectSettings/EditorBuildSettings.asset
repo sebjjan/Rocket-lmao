@@ -5,7 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: add5eaf939697b94ba9f2ae9bfa43757
+  - enabled: 1
+    path: Assets/Scenes/Tennis.unity
+    guid: 7806868d5ce541d4db1870f4dda3ecb4
+  - enabled: 1
+    path: Assets/Scenes/Basket.unity
+    guid: 994b41e02732a0f4e86d0600cdcf06ee
+  - enabled: 1
+    path: Assets/Scenes/FotBoll.unity
+    guid: ce248735891460d4893858bf68377cf6
   m_configObjects: {}

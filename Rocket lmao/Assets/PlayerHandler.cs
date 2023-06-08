@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerHandler : MonoBehaviour
 {
@@ -35,6 +36,9 @@ public class PlayerHandler : MonoBehaviour
         }
     }
 
-
+    public void GoToMain()
+    {
+        SceneManager.LoadScene(0);
+    }
 
 }

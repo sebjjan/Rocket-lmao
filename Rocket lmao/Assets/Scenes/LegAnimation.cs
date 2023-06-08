@@ -24,6 +24,9 @@ public class LegAnimation : MonoBehaviour
    public float lerp = 0;
     private Vector3 oldPos;
     private Vector3 newPos;
+
+    public Rigidbody2D myBody;
+    public float multiplier;
     // Start is called before the first frame update
     void Start()
     {
@@ -95,8 +98,9 @@ public class LegAnimation : MonoBehaviour
         List<Collider2D> colliders = new List<Collider2D>();
         searchRange.OverlapCollider(contactFilter, colliders);
         */
-        RaycastHit2D rayHit = Physics2D.Raycast(RayCaster.position, Vector2.down, 100000, layerMask);
-        if(rayHit.point != Vector2.zero)
+       // RaycastHit2D rayHit = Physics2D.Raycast(RayCaster.position, Vector2.down, 100000, layerMask);
+        RaycastHit2D rayHit = Physics2D.Raycast(balance.transform.position + new Vector3(myBody.velocity.x,0,0) * multiplier, Vector2.down, 100000, layerMask);
+        if (rayHit.point != Vector2.zero)
         {
            
             footTarget = rayHit.point;

@@ -30,6 +30,9 @@ public class PlayerMovement : MonoBehaviour
     public GameObject bat;
 
     public float armForce;
+    public float controllerarmForce;
+
+    public GameObject crossHair;
     
     private void Start()
     {
@@ -71,14 +74,16 @@ public class PlayerMovement : MonoBehaviour
 
         if (playerInput.currentControlScheme == "Gamepad")
         {
-            Vector2 test = stickAim * armForce;
-            batHand.transform.right= stickAim;
-            batHand.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-           // batHand.GetComponent<Rigidbody2D>().AddForce(stickAim.normalized * armForce);
+            crossHair.transform.position = (Vector2)transform.position + stickAim * crosshairDistance;
 
-           // bat.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            // bat.GetComponent<Rigidbody2D>().AddForce(stickAim.normalized * armForce);
-            batHand.GetComponent<Rigidbody2D>().AddForce((mouseWorldPos - (Vector2)batHand.transform.position).normalized * armForce);
+           // Vector2 test = stickAim * armForce;
+           // batHand.transform.right = stickAim;
+            batHand.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            batHand.GetComponent<Rigidbody2D>().AddForce((crossHair.transform.position - batHand.transform.position).normalized * controllerarmForce);
+
+            //bat.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+             bat.GetComponent<Rigidbody2D>().AddForce((crossHair.transform.position - bat.transform.position).normalized * controllerarmForce);
+           // batHand.GetComponent<Rigidbody2D>().AddForce((mouseWorldPos - (Vector2)batHand.transform.position).normalized * armForce);
 
 
         }
@@ -102,13 +107,20 @@ public class PlayerMovement : MonoBehaviour
 
 
         // rb.velocity = new Vector2(Vector2.ClampMagnitude(speed * horizontalInput, maxSpeed).x, rb.velocity.y);
-        if (true /*rb.velocity.x < maxSpeed*/)
+
+        /*
+        if (true )
         {
             rb.AddForce(new Vector2(speed*horizontalInput.x, 0));
         }
+        */
 
-       
-      
+
+        if (rb.velocity.x < maxSpeed && rb.velocity.x > -maxSpeed)
+        {
+            rb.AddForce(new Vector2(speed * horizontalInput.x, 0));
+        }
+
 
 
 
@@ -117,9 +129,12 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Move(CallbackContext context)
     {
+       
 
-
-
+        if (horizontalInput != context.ReadValue<Vector2>())
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
 
         horizontalInput = context.ReadValue<Vector2>();
 
@@ -127,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
         {
             foreach (GameObject g in flipList)
             {
-                g.GetComponent<Transform>().localPosition = new Vector3(-20, -20, 1);
+                g.GetComponent<Transform>().localPosition = new Vector3(-40, -20, 1);
             }
             //GetComponent<Transform>().localScale = new Vector3(-1,1,1);
             // IKStuff.GetComponent<Transform>().localScale = new Vector3(-1, 1, 1);
@@ -136,7 +151,7 @@ public class PlayerMovement : MonoBehaviour
         {
             foreach (GameObject g in flipList)
             {
-                g.GetComponent<Transform>().localPosition = new Vector3(20, -20, 1);
+                g.GetComponent<Transform>().localPosition = new Vector3(40, -20, 1);
                 // gameObject.GetComponent<Transform>().localPosition += new Vector3(40, 0, 0);
             }
             //GetComponent<Transform>().localScale = new Vector3(1, 1, 1);

@@ -6,12 +6,12 @@ public class GoalScript : MonoBehaviour
 {
     public bool isBlueTeam;
     public ScoreScript score;
-  
+    private ParticleSystem particle;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        particle = GetComponentInChildren<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -24,6 +24,7 @@ public class GoalScript : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("ball"))
         {
+            particle.Play();
             if (isBlueTeam)
             {
                 score.ScoreRed();
