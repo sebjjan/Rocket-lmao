@@ -968,7 +968,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1620953615}
         m_TargetAssemblyTypeName: MenuScript, Assembly-CSharp
-        m_MethodName: Basket
+        m_MethodName: Football
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
