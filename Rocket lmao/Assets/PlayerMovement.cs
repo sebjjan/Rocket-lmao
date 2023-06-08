@@ -107,13 +107,20 @@ public class PlayerMovement : MonoBehaviour
 
 
         // rb.velocity = new Vector2(Vector2.ClampMagnitude(speed * horizontalInput, maxSpeed).x, rb.velocity.y);
-        if (true /*rb.velocity.x < maxSpeed*/)
+
+        /*
+        if (true )
         {
             rb.AddForce(new Vector2(speed*horizontalInput.x, 0));
         }
+        */
 
-       
-      
+
+        if (rb.velocity.x < maxSpeed && rb.velocity.x > -maxSpeed)
+        {
+            rb.AddForce(new Vector2(speed * horizontalInput.x, 0));
+        }
+
 
 
 
@@ -122,9 +129,12 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Move(CallbackContext context)
     {
+       
 
-
-
+        if (horizontalInput != context.ReadValue<Vector2>())
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
 
         horizontalInput = context.ReadValue<Vector2>();
 
@@ -132,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
         {
             foreach (GameObject g in flipList)
             {
-                g.GetComponent<Transform>().localPosition = new Vector3(-20, -20, 1);
+                g.GetComponent<Transform>().localPosition = new Vector3(-40, -20, 1);
             }
             //GetComponent<Transform>().localScale = new Vector3(-1,1,1);
             // IKStuff.GetComponent<Transform>().localScale = new Vector3(-1, 1, 1);
@@ -141,7 +151,7 @@ public class PlayerMovement : MonoBehaviour
         {
             foreach (GameObject g in flipList)
             {
-                g.GetComponent<Transform>().localPosition = new Vector3(20, -20, 1);
+                g.GetComponent<Transform>().localPosition = new Vector3(40, -20, 1);
                 // gameObject.GetComponent<Transform>().localPosition += new Vector3(40, 0, 0);
             }
             //GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
