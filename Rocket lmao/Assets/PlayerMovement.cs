@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -34,31 +35,33 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject crossHair;
 
+
+
     private void Awake()
     {
-        
+
     }
     private void Start()
     {
-       // rb.MovePosition(new Vector3(0, 100, 0));
+        // rb.MovePosition(new Vector3(0, 100, 0));
         rb = GetComponent<Rigidbody2D>();
         playerInput = GetComponent<PlayerInput>();
-       
+
     }
-  
+
     private void Update()
     {
-        
+
         mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         // mouseWorldPos.z = 0;
 
         if (playerInput.currentControlScheme == "Gamepad")
         {
-           // Crosshair.transform.position = (Vector2)transform.position + stickAim * crosshairDistance;
+            // Crosshair.transform.position = (Vector2)transform.position + stickAim * crosshairDistance;
         }
         else
         {
-           // Crosshair.transform.position = mouseWorldPos;
+            // Crosshair.transform.position = mouseWorldPos;
         }
 
         //float horizontalInput = Input.GetAxis("Horizontal");
@@ -82,14 +85,14 @@ public class PlayerMovement : MonoBehaviour
         {
             crossHair.transform.position = (Vector2)transform.position + stickAim * crosshairDistance;
 
-           // Vector2 test = stickAim * armForce;
-           // batHand.transform.right = stickAim;
+            // Vector2 test = stickAim * armForce;
+            // batHand.transform.right = stickAim;
             batHand.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             batHand.GetComponent<Rigidbody2D>().AddForce((crossHair.transform.position - batHand.transform.position).normalized * controllerarmForce);
 
             //bat.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-             bat.GetComponent<Rigidbody2D>().AddForce((crossHair.transform.position - bat.transform.position).normalized * controllerarmForce);
-           // batHand.GetComponent<Rigidbody2D>().AddForce((mouseWorldPos - (Vector2)batHand.transform.position).normalized * armForce);
+            bat.GetComponent<Rigidbody2D>().AddForce((crossHair.transform.position - bat.transform.position).normalized * controllerarmForce);
+            // batHand.GetComponent<Rigidbody2D>().AddForce((mouseWorldPos - (Vector2)batHand.transform.position).normalized * armForce);
 
 
         }
@@ -107,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
             batHand.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             batHand.GetComponent<Rigidbody2D>().AddForce((mouseWorldPos - (Vector2)batHand.transform.position).normalized * armForce);
 
-          //  bat.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            //  bat.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             bat.GetComponent<Rigidbody2D>().AddForce((mouseWorldPos - (Vector2)bat.transform.position).normalized * armForce);
         }
 
@@ -135,7 +138,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Move(CallbackContext context)
     {
-       
+
 
         if (horizontalInput != context.ReadValue<Vector2>())
         {
@@ -167,17 +170,22 @@ public class PlayerMovement : MonoBehaviour
         //  rb.AddForce(speed * horizontalInput);
     }
 
+
+
+
     public void Jump()
     {
-       
+
         if (!isJumping)
         {
-           
+
             rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
             isJumping = true;
         }
 
     }
+
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -201,15 +209,40 @@ public class PlayerMovement : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawRay(transform.position, mouseWorldPos - (Vector2)batHand.transform.position);
-       
+
     }
 
-    
+
     public void GoToMain()
     {
         SceneManager.LoadScene(0);
     }
 
-    
+    public void WalkRight()
+    {
+        rb.AddForce(new Vector2(speed, 0));
+
+        foreach (GameObject g in flipList)
+        {
+            g.GetComponent<Transform>().localPosition = new Vector3(40, -20, 1);
+        }
+    }
+
+    public void WalkLeft()
+    {
+
+
+         rb.AddForce(new Vector2(-speed, 0));
+
+        foreach (GameObject g in flipList)
+        {
+            g.GetComponent<Transform>().localPosition = new Vector3(-40, -20, 1);
+        }
+        //GetComponent<Transform>().localScale = new Vector3(-1,1,1);
+        // IKStuff.GetComponent<Transform>().localScale = new Vector3(-1, 1, 1);
+    }
+
 
 }
+
+
