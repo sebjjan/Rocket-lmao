@@ -15,6 +15,33 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "ArcadeLeft",
+                    "type": "Button",
+                    "id": "b269b3b3-689e-422d-8d3a-cb32e3ef7f1a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ArcadeRight",
+                    "type": "Button",
+                    "id": "7b92dfee-6f59-45bf-a4da-c6d2c916c0a5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ArcadeJump",
+                    "type": "Button",
+                    "id": "81d5e248-543a-4945-a34f-f3e357605873",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "b1b66be1-eba3-4635-85a8-915b1143b60b",
@@ -225,6 +252,39 @@
                     "action": "Restart",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d5132930-f59c-45ab-9478-6ee2be86a739",
+                    "path": "<XInputController>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "ArcadeLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6c51b302-0b88-4bd1-884c-4d18b99cbecc",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "ArcadeRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dfa2d9d7-bcde-4226-bdf1-0547b189742c",
+                    "path": "<XInputController>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "ArcadeJump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -242,6 +302,33 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "ArcadeJump",
+                    "type": "Value",
+                    "id": "19f1198c-26b4-428c-97ff-4dc9370f410a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "ArcadeRight",
+                    "type": "Value",
+                    "id": "f8cfc856-788b-4b94-b7cc-128ed9876cac",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "ArcadeLeft",
+                    "type": "Value",
+                    "id": "feac2e47-800e-4b3f-9743-11a11f97c976",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Smash",
                     "type": "Button",
                     "id": "5c58addb-283d-417b-9240-da9b4c9abbee",
@@ -251,7 +338,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Move",
+                    "name": "MoveArcade",
                     "type": "Button",
                     "id": "217f7a07-3f76-4b12-b27a-2e604a27a931",
                     "expectedControlType": "Button",
@@ -385,7 +472,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Move",
+                    "action": "MoveArcade",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -396,7 +483,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Move",
+                    "action": "MoveArcade",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -407,7 +494,40 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Move",
+                    "action": "MoveArcade",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b18b421d-39ed-4c2b-a454-6ed21df0c948",
+                    "path": "<XInputController>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "ArcadeLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "33208327-3970-40ec-bef2-f3703b65f5df",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "ArcadeRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6c2e8c42-6f85-429b-96e9-85d7c765dc64",
+                    "path": "<XInputController>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "ArcadeJump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
